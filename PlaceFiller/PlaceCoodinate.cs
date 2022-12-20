@@ -37,14 +37,14 @@ namespace PlaceFiller
         public static PlaceCoodinate CreateFrom2017(string data)
         {
             // Data Example
-            // 1490991480000,+++/DjiwyzTQzfai1RGavwwdeF0=,4,33,13
+            // 2017-04-02 01:09:43.559 UTC,XYoA7YaSBAX2tFn6GOjrfg==,771,440,15
 
             // Data Split
-            // 0. 1490991480000
-            // 1. +++/DjiwyzTQzfai1RGavwwdeF0=
-            // 2. 4
-            // 3. 33
-            // 4. 13
+            // 0. 2017-04-02 01:09:43.559 UTC
+            // 1. XYoA7YaSBAX2tFn6GOjrfg==
+            // 2. 771
+            // 3. 440
+            // 4. 15
 
             // TODO: Update to newly downloaded DataSet
 
@@ -54,12 +54,37 @@ namespace PlaceFiller
                 parts[i] = parts[i].Replace(",", "");
             }
 
-            DateTime timeStamp = new DateTime(long.Parse(parts[0]));
+            DateTime timeStamp;
+
+            switch (parts[0].Length)
+            {
+                case 27:
+                    timeStamp = DateTime.ParseExact(parts[0], "yyyy-MM-dd HH:mm:ss.fff UTC", CultureInfo.InvariantCulture);
+                    break;
+
+                case 26:
+                    timeStamp = DateTime.ParseExact(parts[0], "yyyy-MM-dd HH:mm:ss.ff UTC", CultureInfo.InvariantCulture);
+                    break;
+
+                case 25:
+                    timeStamp = DateTime.ParseExact(parts[0], "yyyy-MM-dd HH:mm:ss.f UTC", CultureInfo.InvariantCulture);
+                    break;
+
+                case 23:
+                    timeStamp = DateTime.ParseExact(parts[0], "yyyy-MM-dd HH:mm:ss UTC", CultureInfo.InvariantCulture);
+                    break;
+
+                default:
+                    Console.WriteLine($"Inconvenient string with {parts[0].Length} chars found: {parts[0]}");
+                    timeStamp = DateTime.Now;
+                    break;
+            }
+
             string user = parts[1];
-            short x = short.Parse(parts[2]);
-            short y = short.Parse(parts[3]);
-            byte color = byte.Parse(parts[4]);
-            return new PlaceCoodinate(timeStamp, user, x, y, NumberToColor(color));
+            short x = short.Parse(parts[2].Length >= 1 ? parts[2] : "0");
+            short y = short.Parse(parts[3].Length >= 1 ? parts[3] : "0");
+            byte color = byte.Parse(parts[4].Length >= 1 ? parts[4] : "0");
+            return new PlaceCoodinate(timeStamp, user, x, y, ColorPallet.NumberToColor2017(color));
         }
 
         /// <summary>
@@ -71,7 +96,7 @@ namespace PlaceFiller
         {
             // Data Example
             // 2022-04-04 00:53:51.577 UTC,ovTZk4GyTS1mDQnTbV+vDOCu1f+u6w+CkIZ6445vD4XN8alFy/6GtNkYp5MSic6Tjo/fBCCGe6oZKMAN3rEZHw==,#00CCC0,"826,1048"
-
+            
             // Data Split
             // 0. 2022-04-04 00:53:51.577 UTC
             // 1. ovTZk4GyTS1mDQnTbV+vDOCu1f+u6w+CkIZ6445vD4XN8alFy/6GtNkYp5MSic6Tjo/fBCCGe6oZKMAN3rEZHw==

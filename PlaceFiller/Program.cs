@@ -11,8 +11,8 @@ internal class Program
     {
         Console.WriteLine("Hello, World!");
 
-        TwentySevenTeen.Calc2017();
-        //Calc2022()
+        TwentySevenTeen twentySevenTeen = new TwentySevenTeen();
+        twentySevenTeen.Calc2017();
 
         Console.ReadLine();
     }

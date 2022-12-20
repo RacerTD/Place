@@ -13,7 +13,7 @@ namespace PlaceFiller
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public static byte ColorToNumber(string color)
+        public static byte ColorToNumber2022(string color)
         {
             return color switch
             {
@@ -53,9 +53,68 @@ namespace PlaceFiller
             };
         }
 
+        public static string NumberToColor2022(byte number)
+        {
+            return number switch
+            {
+                0 => "6D001A",
+                1 => "BE0039",
+                2 => "FF4500",
+                3 => "FFA800",
+                4 => "FFD635",
+                5 => "FFF8B8",
+                6 => "00A368",
+                7 => "00CC78",
+                8 => "7EED56",
+                9 => "00756F",
+                10 => "009EAA",
+                11 => "00CCC0",
+                12 => "2450A4",
+                13 => "3690EA",
+                14 => "51E9F4",
+                15 => "493AC1",
+                16 => "6A5CFF",
+                17 => "94B3FF",
+                18 => "811E9F",
+                19 => "B44AC0",
+                20 => "E4ABFF",
+                21 => "DE107F",
+                22 => "FF3881",
+                23 => "FF99AA",
+                24 => "6D482F",
+                25 => "9C6926",
+                26 => "FFB470",
+                27 => "000000",
+                28 => "515252",
+                29 => "898D90",
+                30 => "D4D7D9",
+                31 => "FFFFFF",
+                _ => "FFFFFF"
+            };
+        }
+
         public static byte ColorToNumber2017(string color)
         {
-
+            return color switch
+            {
+                "FFFFFF" => 0,
+                "E4E4E4" => 1,
+                "888888" => 2,
+                "222222" => 3,
+                "FFA7D1" => 4,
+                "E50000" => 5,
+                "E59500" => 6,
+                "A06A42" => 7,
+                "E5D900" => 8,
+                "94E044" => 9,
+                "02BE01" => 10,
+                "00E5F0" => 11,
+                "0083C7" => 12,
+                "0000EA" => 13,
+                "E04AFF" => 14,
+                "820080" => 15,
+                _ => 0
+            };
         }
 
         /// <summary>
@@ -86,11 +145,6 @@ namespace PlaceFiller
                 15 => "820080",
                 _ => "FFFFFF"
             };
-        }
-
-        public static string NumberToColor2022(byte number)
-        {
-
         }
     }
 

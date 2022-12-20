@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>PlaceFiller</id>
+    <version>1.0.0</version>
+    <authors>PlaceFiller</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.runtimeconfig.json" target="lib\net6.0\PlaceFiller.runtimeconfig.json" />
+    <file src="C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.dll" target="lib\net6.0\PlaceFiller.dll" />
+  </files>
+</package>
