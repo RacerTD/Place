@@ -1,0 +1,15 @@
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.exe
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.deps.json
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.runtimeconfig.json
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.dll
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\bin\Debug\net6.0\PlaceFiller.pdb
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.csproj.AssemblyReference.cache
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.AssemblyInfoInputs.cache
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.AssemblyInfo.cs
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.csproj.CoreCompileInputs.cache
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.dll
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\refint\PlaceFiller.dll
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.pdb
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\PlaceFiller.genruntimeconfig.cache
+C:\Users\Tobias Deyle\source\repos\PlaceFiller\obj\Debug\net6.0\ref\PlaceFiller.dll
