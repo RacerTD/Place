@@ -11,37 +11,45 @@ internal class Program
     {
         Console.WriteLine("Hello, World!");
 
-        TwentySevenTeen twentySevenTeen = new TwentySevenTeen();
-        twentySevenTeen.Calc2017();
+        //TwentySevenTeen twentySevenTeen = new TwentySevenTeen();
+        //twentySevenTeen.Calc2017(false);
 
+        TwentyTwentyTwo twentyTwentyTwo = new TwentyTwentyTwo();
+        //twentyTwentyTwo.CountData();
+        //twentyTwentyTwo.ReadDataIntoDatabase();
+        twentyTwentyTwo.CreateDatasets();
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("All done.");
         Console.ReadLine();
     }
 
-    private static void Calc2022()
-    {
-        using (StreamReader reader = new StreamReader(Path2022))
-        {
-            reader.ReadLine();
-            int counter = 0;
-            double percentage = 0;
-            double oldPercentage = 0;
+    //private static void Calc2022()
+    //{
+    //    using (StreamReader reader = new StreamReader(Path2022))
+    //    {
+    //        reader.ReadLine();
+    //        int counter = 0;
+    //        double percentage = 0;
+    //        double oldPercentage = 0;
 
-            for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
-            {
-                // Percent on screen
-                counter++;
-                if (counter % 10000 == 0)
-                {
-                    percentage = (double)counter / Total2022 * 100;
-                    if (oldPercentage != percentage)
-                    {
-                        Console.Write("\rProgress: {0:F2}%", percentage);
-                        oldPercentage = percentage;
-                    }
-                }
-            }
+    //        for (string line = reader.ReadLine(); line != null; line = reader.ReadLine())
+    //        {
+    //            // Percent on screen
+    //            counter++;
+    //            if (counter % 10000 == 0)
+    //            {
+    //                percentage = (double)counter / Total2022 * 100;
+    //                if (oldPercentage != percentage)
+    //                {
+    //                    Console.Write("\rProgress: {0:F2}%", percentage);
+    //                    oldPercentage = percentage;
+    //                }
+    //            }
+    //        }
 
-            Console.WriteLine("Total things: " + counter.ToString());
-        }
-    }
+    //        Console.WriteLine("Total things: " + counter.ToString());
+    //    }
+    //}
 }

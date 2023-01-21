@@ -1220,11 +1220,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tobias Deyle\\source\\repos\\PlaceFiller\\PlaceFiller.csproj",
+      "projectUniqueName": "C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\PlaceFiller.csproj",
       "projectName": "PlaceFiller",
-      "projectPath": "C:\\Users\\Tobias Deyle\\source\\repos\\PlaceFiller\\PlaceFiller.csproj",
+      "projectPath": "C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\PlaceFiller.csproj",
       "packagesPath": "C:\\Users\\Tobias Deyle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tobias Deyle\\source\\repos\\PlaceFiller\\obj\\",
+      "outputPath": "C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tobias Deyle\\AppData\\Roaming\\NuGet\\NuGet.Config",
