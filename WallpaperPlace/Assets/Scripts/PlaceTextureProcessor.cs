@@ -4,13 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Mono.Data.Sqlite;
 
 public partial class PlaceTextureProcessor : MonoBehaviour
 {
-
-
-
     [SerializeField] private Texture2D _texture;
     [SerializeField] private Material _material;
     // [SerializeField] private MeshRenderer _cubeRenderer;
@@ -239,7 +235,7 @@ public partial class PlaceTextureProcessor : MonoBehaviour
             long timeStamp = long.Parse(splitDataSet[0]);
             List<Coordinate> tempCoordinates = new List<Coordinate>();
 
-            for (int j = 1; j < splitDataSet.Length; j++)
+            for (int j = 2; j < splitDataSet.Length; j++)
             {
                 string[] splitCoordinate = splitDataSet[j].Split(",");
                 tempCoordinates.Add(new Coordinate(short.Parse(splitCoordinate[0]), short.Parse(splitCoordinate[1]), byte.Parse(splitCoordinate[2])));

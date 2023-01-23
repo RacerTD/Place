@@ -14,7 +14,7 @@ namespace PlaceFiller
     public class TwentySevenTeen
     {
         public string Path = "C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\2017.csv";
-        public static string DataBaseConnectionString = "Data Source=C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\2017.sqlite;Version=3;";
+        public static string DataBaseConnectionString = "Data Source=C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\database.sqlite;Version=3;";
         public static int Total2017 = 16559897;
 
         /// <summary>
@@ -26,12 +26,12 @@ namespace PlaceFiller
             //PlaceCoodinate[] placeCoodinates = new PlaceCoodinate[Total2017];
             List<PlaceCoordinate> placeCoodinates = new List<PlaceCoordinate>();
 
-            ReadCoordinatesToList(ref placeCoodinates, Path);
-            OrderList(ref placeCoodinates);
+            //ReadCoordinatesToList(ref placeCoodinates, Path);
+            //OrderList(ref placeCoodinates);
 
-            Console.WriteLine("Data Count: " + placeCoodinates.Count);
-            placeCoodinates = placeCoodinates.Where(c => c.TimeStamp.Ticks >= 636266016310000000).ToList();
-            Console.WriteLine("Data Count: " + placeCoodinates.Count);
+            //Console.WriteLine("Data Count: " + placeCoodinates.Count);
+            //placeCoodinates = placeCoodinates.Where(c => c.TimeStamp.Ticks >= 636266016310000000).ToList();
+            //Console.WriteLine("Data Count: " + placeCoodinates.Count);
 
             //Console.WriteLine();
             //Console.WriteLine("First Placement: " + placeCoodinates.First().ToString());
@@ -41,11 +41,13 @@ namespace PlaceFiller
 
             if (addToDataBase)
             {
-                CopyToDataBase(ref placeCoodinates);
+                CopyToDataBase(ref placeCoodinates, true);
             }
 
+            SaveToFiles();
+
             //SaveToAssetFiles(ref placeCoodinates);
-            SaveToAssetFilesNewDataFormat(ref placeCoodinates, 10);
+            //SaveToAssetFilesNewDataFormat(ref placeCoodinates, 10);
 
             placeCoodinates.Clear();
 
@@ -125,6 +127,7 @@ namespace PlaceFiller
                 {
                     command.CommandText =
                         "CREATE TABLE Data2017 (" +
+                        "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "TimeStamp DATETIME," +
                         "User TEXT," +
                         "X INTEGER," +
@@ -274,6 +277,98 @@ namespace PlaceFiller
             Console.WriteLine("All data written");
         }
 
+        private void SaveToFiles()
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Starting writing to disk");
+
+            string filePath = "C:\\Users\\Tobias Deyle\\Documents\\GitHub\\Place\\PlaceFiller\\2017\\";
+            string fileExtension = ".txt";
+            int fileCounter = 0;
+
+            DateTime start = new DateTime(2017, 04, 01, 00, 00, 00);
+            DateTime end = start.AddHours(72);
+
+            DateTime currentStart = start;
+            DateTime currentEnd = start.AddMinutes(5);
+
+            while (currentStart < end)
+            {
+                // Display
+                Console.Write("\r" + currentStart.ToString("yyyy-MM-dd HH:mm:ss.fff UTC"));
+
+                File.WriteAllText(filePath + fileCounter + fileExtension, GenerateFileString(currentStart, currentEnd));
+
+                fileCounter++;
+                currentStart = currentStart.AddMinutes(5);
+                currentEnd = currentEnd.AddMinutes(5);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Finished writing to disk");
+
+            // Generate Subsets
+            List<List<int>> subsets = new List<List<int>>();
+
+        }
+
+        private string GenerateFileString(DateTime start, DateTime end)
+        {
+            DateTime currentStart = start;
+            DateTime currentEnd = start.AddMilliseconds(50);
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while (currentStart < end)
+            {
+                Console.Write("\r" + currentStart.ToString("yyyy-MM-dd HH:mm:ss.fff UTC"));
+
+                stringBuilder.AppendLine(GenerateLineString(currentStart, currentEnd));
+
+                currentStart = currentStart.AddMilliseconds(50);
+                currentEnd = currentEnd.AddMilliseconds(50);
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        private string GenerateLineString(DateTime start, DateTime end)
+        {
+            // Get data from database and generate string
+            List<PlaceCoordinate> places = new List<PlaceCoordinate>();
+
+            using (var connection = new SQLiteConnection(DataBaseConnectionString))
+            {
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM Data2017 WHERE TimeStamp BETWEEN @start_date AND @end_date;";
+                    command.Parameters.AddWithValue("@start_date", start);
+                    command.Parameters.AddWithValue("@end_date", end);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            places.Add(new PlaceCoordinate(
+                                reader.GetDateTime(1),
+                                reader.GetString(2),
+                                reader.GetInt16(3),
+                                reader.GetInt16(4),
+                                reader.GetString(5)));
+                        }
+                    }
+                }
+            }
+
+            string result = start.Ticks.ToString();
+            foreach (PlaceCoordinate place in places)
+            {
+                result += $";{place.X},{place.Y},{ColorPallet.ColorToNumber2017(place.Color)}";
+            }
+            return result;
+        }
+
         /// <summary>
         /// Writes the data to disk in a very simple csv format
         /// This saves about 50% of filesize
@@ -345,34 +440,34 @@ namespace PlaceFiller
             Console.WriteLine("Starting creation of Camera Positions");
 
             // Now creating the camera positions
-            List<PlaceDataset> tempPlaces = new List<PlaceDataset>();
-            for(int i = 0; i < places.Count; i++)
-            {
-                // Percent on screen
-                if (i % 10 == 0)
-                {
-                    double percentage = Math.Clamp((double)i / places.Count * 100, 0, 100);
-                    Console.Write("\rProgress: {0:F2}%", percentage);
-                }
+            //List<PlaceDataset> tempPlaces = new List<PlaceDataset>();
+            //for(int i = 0; i < places.Count; i++)
+            //{
+            //    // Percent on screen
+            //    if (i % 10 == 0)
+            //    {
+            //        double percentage = Math.Clamp((double)i / places.Count * 100, 0, 100);
+            //        Console.Write("\rProgress: {0:F2}%", percentage);
+            //    }
 
-                tempPlaces = places.GetRange(Math.Max(0, i - 150), Math.Min(places.Count - Math.Max(0, i - 150), 300));
+            //    tempPlaces = places.GetRange(Math.Max(0, i - 150), Math.Min(places.Count - Math.Max(0, i - 150), 300));
 
-                long x = 0;
-                long y = 0;
-                int count = 0;
+            //    long x = 0;
+            //    long y = 0;
+            //    int count = 0;
 
-                foreach (PlaceDataset place in tempPlaces)
-                {
-                    foreach (PlaceCoordinate p in place.changeList)
-                    {
-                        x += p.X;
-                        y += p.Y;
-                        count++;
-                    }
-                }
+            //    foreach (PlaceDataset place in tempPlaces)
+            //    {
+            //        foreach (PlaceCoordinate p in place.changeList)
+            //        {
+            //            x += p.X;
+            //            y += p.Y;
+            //            count++;
+            //        }
+            //    }
 
-                places[i].cameraPos = new Vector2((short)(x / count), (short)(y / count));
-            }
+            //    places[i].cameraPos = new Vector2((short)(x / count), (short)(y / count));
+            //}
 
             Console.WriteLine();
             Console.WriteLine("Camera Positions created");

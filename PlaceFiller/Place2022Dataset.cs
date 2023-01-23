@@ -5,12 +5,14 @@
         public DateTime startTime;
         public DateTime endTime;
         public List<int> changeIndexes;
+        public List<PlaceCoordinate> changedCoordinates;
 
         public Place2022Dataset(DateTime startTime, DateTime endTime)
         {
             this.startTime = startTime;
             this.endTime = endTime;
             this.changeIndexes = new List<int>();
+            this.changedCoordinates= new List<PlaceCoordinate>();
         }
 
         public override string ToString()

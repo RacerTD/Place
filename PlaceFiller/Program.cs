@@ -11,13 +11,14 @@ internal class Program
     {
         Console.WriteLine("Hello, World!");
 
-        //TwentySevenTeen twentySevenTeen = new TwentySevenTeen();
-        //twentySevenTeen.Calc2017(false);
+        TwentySevenTeen twentySevenTeen = new TwentySevenTeen();
+        twentySevenTeen.Calc2017(false);
 
-        TwentyTwentyTwo twentyTwentyTwo = new TwentyTwentyTwo();
+        //TwentyTwentyTwo twentyTwentyTwo = new TwentyTwentyTwo();
         //twentyTwentyTwo.CountData();
         //twentyTwentyTwo.ReadDataIntoDatabase();
-        twentyTwentyTwo.CreateDatasets();
+        //twentyTwentyTwo.CreateDatasets();
+        //twentyTwentyTwo.CreateCameraPositons();
 
         Console.WriteLine();
         Console.WriteLine();
